@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 class SignUpView extends ConsumerWidget {
   const SignUpView({super.key});
 
-// providerからstateとviewmodelを取得
+  // providerからstateとviewmodelを取得
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ViewModelの状態を監視
@@ -14,19 +14,19 @@ class SignUpView extends ConsumerWidget {
     // ViewModelの操作用インスタンスを取得
     final viewModel = ref.read(signupViewModelProvider.notifier);
 
-  // successがtrueならホーム画面へ遷移
-  ref.listen(signupViewModelProvider, (previous, next) {
-    if (next.success) {
-      context.go('/home');
-    }
-  });
+    // successがtrueならホーム画面へ遷移
+    ref.listen(signupViewModelProvider, (previous, next) {
+      if (next.success) {
+        context.go('/home');
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
         title: const Text('サインアップ'),
         titleTextStyle: const TextStyle(
-          fontSize: 25,
+          fontSize: 18,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -91,7 +91,11 @@ class SignUpView extends ConsumerWidget {
                 onPressed: state.isLoading
                     ? null
                     : () {
-                        viewModel.signup(state.email, state.password, state.username);
+                        viewModel.signup(
+                          state.email,
+                          state.password,
+                          state.username,
+                        );
                       },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
@@ -110,7 +114,7 @@ class SignUpView extends ConsumerWidget {
             // ログイン画面へのリンク
             TextButton(
               onPressed: () {
-                context.push( '/signin');
+                context.push('/signin');
               },
               child: const Text('すでにアカウントをお持ちの方はこちら'),
             ),

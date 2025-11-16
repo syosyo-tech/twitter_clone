@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 class SignInView extends ConsumerWidget {
   const SignInView({super.key});
 
-// providerからstateとviewmodelを取得
+  // providerからstateとviewmodelを取得
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ViewModelの状態を監視
@@ -14,19 +14,19 @@ class SignInView extends ConsumerWidget {
     // ViewModelの操作用インスタンスを取得
     final viewModel = ref.read(signinViewModelProvider.notifier);
 
-  // successがtrueならホーム画面へ遷移
-  ref.listen(signinViewModelProvider, (previous, next) {
-    if (next.success) {
-      context.go('/home');
-    }
-  });
+    // successがtrueならホーム画面へ遷移
+    ref.listen(signinViewModelProvider, (previous, next) {
+      if (next.success) {
+        context.go('/home');
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
         title: const Text('サインイン'),
         titleTextStyle: const TextStyle(
-          fontSize: 25,
+          fontSize: 18,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -77,15 +77,17 @@ class SignInView extends ConsumerWidget {
                 onPressed: state.isLoading
                     ? null
                     : () {
-                        viewModel.signin( state.email, state.password);
+                        viewModel.signin(state.email, state.password);
                       },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
                 ),
                 child: state.isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('サインイン'
-                        , style: TextStyle(color: Colors.white)),
+                    : const Text(
+                        'サインイン',
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
             ),
           ],
